@@ -1,0 +1,5 @@
+Estudiar calculo|5|5|60|2026-01-03
+Hacer deber de historia|3|3|45|2026-01-06
+Ordenar apuntes|2|1|30|2026-01-15
+Proyecto de C|5|4|180|2026-01-04
+Hacer ejercicio|3|2|40|2026-01-10
