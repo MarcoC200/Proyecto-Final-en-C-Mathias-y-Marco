@@ -1,37 +1,60 @@
 #include <stdio.h>
+#include <stdlib.h> 
 #include <string.h>
-#include "task.h"
-#include "io.h"
-#include "scheduler.h"
+#include "../include/task.h"
+#include "../include/io.h"
+#include "../include/scheduler.h"
+
+#ifdef _WIN32
+    #include <windows.h>
+#endif
 
 #define MAX_TASKS 200
 
+void clear_screen() {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
 static void print_menu() {
-    printf("\nPLANIFICADOR DE TAREAS\n");
-    printf("1. Agregar tarea\n");
-    printf("2. Ver tareas\n");
-    printf("3. Generar plan recomendado\n");
-    printf("4. Cargar tareas de ejemplo (data/tasks_sample.txt)\n");
-    printf("5. Salir\n");
+    printf("\n");
+    printf("   ╔════════════════════════════════════════════════════╗\n");
+    printf("   ║           PLANIFICADOR DE TAREAS (IA)              ║\n");
+    printf("   ╠════════════════════════════════════════════════════╣\n");
+    printf("   ║  1. Agregar tarea                                  ║\n");
+    printf("   ║  2. Ver tareas                                     ║\n");
+    printf("   ║  3. Generar plan recomendado                       ║\n");
+    printf("   ║  4. Cargar tareas de ejemplo                       ║\n");
+    printf("   ║  5. Salir                                          ║\n");
+    printf("   ╚════════════════════════════════════════════════════╝\n");
+    printf("\n   Opcion > ");
 }
 
 int main() {
+
+    #ifdef _WIN32
+        SetConsoleOutputCP(65001);
+    #endif
+
     Task tasks[MAX_TASKS];
     size_t n = 0;
     int next_id = 1;
-
     int op = 0;
+
+    clear_screen();
 
     while (1) {
         print_menu();
-        printf("\nOpcion: ");
+        
         if (scanf("%d", &op) != 1) {
-            // limpiar input
+
             int c;
             while ((c = getchar()) != '\n' && c != EOF) {}
             continue;
         }
-        // limpiar salto de línea
         int c;
         while ((c = getchar()) != '\n' && c != EOF) {}
 
@@ -41,54 +64,70 @@ int main() {
                 continue;
             }
             Task t;
-            if (!io_read_task(&t, next_id)) {
-                printf("Entrada invalida. Intenta de nuevo.\n");
-                continue;
+
+            if (io_read_task(&t, next_id)) {
+                next_id++;
+                tasks[n++] = t;
+
+            } else {
+                printf("Entrada invalida.\n");
             }
-            next_id++;
-            tasks[n++] = t;
-            printf("Tarea agregada.\n");
+            clear_screen(); 
         }
         else if (op == 2) {
+            clear_screen();
             if (n == 0) {
-                printf("No hay tareas.\n");
-                continue;
+                printf("\n   [!] No hay tareas registradas.\n");
+            } else {
+                printf("\n   --- LISTA DE TAREAS ---\n");
+                for (size_t i = 0; i < n; i++) {
+                    task_print_compact(&tasks[i]);
+                }
             }
-            printf("\n--- TAREAS ---\n");
-            for (size_t i = 0; i < n; i++) {
-                task_print_compact(&tasks[i]);
-            }
+            printf("\n   Presiona Enter para volver...");
+            getchar();
+            clear_screen();
         }
         else if (op == 3) {
+            clear_screen();
             if (n == 0) {
-                printf("No hay tareas para recomendar.\n");
-                continue;
-            }
+                printf("\n   [!] No hay tareas para analizar.\n");
+            } else {
+            
+                scheduler_recompute(tasks, n);    
+                scheduler_sort_by_score(tasks, n); 
 
-            scheduler_recompute(tasks, n);
-            scheduler_sort_by_score(tasks, n);
-
-            printf("\n## PLAN RECOMENDADO PARA HOY:\n\n");
-            for (size_t i = 0; i < n; i++) {
-                printf("%zu. %s\n", i + 1, tasks[i].title);
-                printf("   Motivo: %s\n", tasks[i].reason);
+                printf("\n   🧠 PLAN RECOMENDADO POR IA (Prioridad Alta a Baja):\n");
+                for (size_t i = 0; i < n; i++) {
+                    
+                    task_print(&tasks[i]);
+                }
             }
+            printf("\n   Presiona Enter para volver...");
+            getchar();
+            clear_screen();
         }
         else if (op == 4) {
             size_t loaded = 0;
+          
             if (!io_load_tasks_from_file("data/tasks_sample.txt", tasks, MAX_TASKS, &loaded, &next_id)) {
-                printf("No se pudo cargar el archivo.\n");
+                printf("\n   [X] Error: No se encontro 'data/tasks_sample.txt'\n");
             } else {
-                n = loaded;
-                printf("Cargadas %zu tareas desde data/tasks_sample.txt\n", n);
+            
+                n = loaded; 
+                printf("\n   [OK] Se cargaron %zu tareas de ejemplo.\n", n);
             }
+            printf("   Presiona Enter para continuar...");
+            getchar();
+            clear_screen();
         }
         else if (op == 5) {
-            printf("Saliendo...\n");
+            printf("\n   Hasta luego. ¡Mantente productivo!\n");
             break;
         }
         else {
-            printf("Opcion invalida.\n");
+            printf("   Opcion invalida.\n");
+          
         }
     }
 

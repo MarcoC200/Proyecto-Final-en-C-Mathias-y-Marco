@@ -1,27 +1,32 @@
-#include "scheduler.h"
-#include "heuristics.h"
+#include <stddef.h> 
+#include "../include/scheduler.h"
+#include "../include/task.h"
+#include "../include/heuristics.h"
+#include "../include/utils.h"      
 
-static void swap(Task* a, Task* b) {
-    Task tmp = *a;
-    *a = *b;
-    *b = tmp;
-}
+void scheduler_recompute(Task* tasks, size_t count) {
+    for (size_t i = 0; i < count; i++) {
 
-void scheduler_recompute(Task* tasks, size_t n) {
-    for (size_t i = 0; i < n; i++) {
+        tasks[i].days_left = days_until(tasks[i].due);
+        
         heuristic_score(&tasks[i]);
+        
         heuristic_explain(&tasks[i]);
     }
 }
 
-// sort desc por score (simple y estable con bubble mejorado para n chico)
-void scheduler_sort_by_score(Task* tasks, size_t n) {
-    if (!tasks || n < 2) return;
 
-    for (size_t i = 0; i < n; i++) {
-        for (size_t j = 0; j + 1 < n - i; j++) {
-            if (tasks[j].score < tasks[j+1].score) {
-                swap(&tasks[j], &tasks[j+1]);
+void scheduler_sort_by_score(Task* tasks, size_t count) {
+    if (count < 2) return;
+
+    for (size_t i = 0; i < count - 1; i++) {
+        for (size_t j = 0; j < count - i - 1; j++) {
+            
+
+            if (tasks[j].final_score < tasks[j+1].final_score) {
+                Task temp = tasks[j];
+                tasks[j] = tasks[j+1];
+                tasks[j+1] = temp;
             }
         }
     }
