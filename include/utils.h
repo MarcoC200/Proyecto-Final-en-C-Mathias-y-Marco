@@ -1,16 +1,14 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include "task.h"
-#include <stddef.h>
+#include <time.h> 
 
-int read_line(char* buf, size_t cap);
-void trim_newline(char* s);
+#define TITLE_MAX 100
 
-int parse_int(const char* s, int* out);
-int parse_date_yyyy_mm_dd(const char* s, Date* out);
-
-int days_until(Date due);      // puede ser negativo si ya pasó
-int date_is_valid(Date d);
+void trim_newline(char *str);
+int read_line(char *buffer, int size);
+int parse_int(const char *str, int *out);
+int parse_date_yyyy_mm_dd(const char *str, struct tm *out_tm);
+int days_until(struct tm target);
 
 #endif
