@@ -1,1 +1,0 @@
-Algoritmo heurístico
