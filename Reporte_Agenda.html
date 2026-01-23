@@ -1,1 +1,157 @@
-<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'><title>Agenda IA</title><style>:root { --bg: #f8fafc; --text: #1e293b; --primary: #3b82f6; --danger: #ef4444; --success: #22c55e; }body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 40px; margin: 0; }.container { max-width: 900px; margin: 0 auto; background: white; padding: 40px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }h1 { font-size: 2rem; color: #0f172a; margin-bottom: 10px; }.subtitle { color: #64748b; margin-bottom: 30px; }</style><style>table { width: 100%; border-collapse: collapse; margin-top: 20px; }th { text-align: left; padding: 15px; background: #f1f5f9; color: #475569; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; }td { padding: 15px; border-bottom: 1px solid #e2e8f0; }tr:hover { background: #f8fafc; }.badge { padding: 5px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }.badge-urgente { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }.badge-normal { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }</style></head><body><div class='container'><h1>📋 Dashboard de Tareas</h1><p class='subtitle'>Vista general de la memoria del sistema (3 tareas activas)</p><table><thead><tr><th>Actividad</th><th>Categoria</th><th>Fecha Limite</th><th>Duracion</th><th>Estado IA</th></tr></thead><tbody><tr><td style='font-weight:600;'>Ir al futbol</td><td><span style='background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:4px; font-size:0.8rem;'>DEPORTE</span></td><td>2026-01-23</td><td>90 min</td><td><span class='badge badge-urgente'>⚡ URGENTE</span></td></tr><tr><td style='font-weight:600;'>Estudiar para fisica</td><td><span style='background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:4px; font-size:0.8rem;'>UNIVERSIDAD</span></td><td>2026-01-24</td><td>120 min</td><td><span class='badge badge-urgente'>⚡ URGENTE</span></td></tr><tr><td style='font-weight:600;'>Comprar comida</td><td><span style='background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:4px; font-size:0.8rem;'>MANDADOS</span></td><td>2026-01-28</td><td>45 min</td><td><span class='badge badge-normal'>✅ AL DIA</span></td></tr></tbody></table></div></body></html>
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Agenda IA</title>
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --text: #1e293b;
+      --primary: #3b82f6;
+      --danger: #ef4444;
+      --success: #22c55e;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 40px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #64748b;
+      margin-bottom: 30px;
+    }
+  </style>
+
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th {
+      text-align: left;
+      padding: 15px;
+      background: #f1f5f9;
+      color: #475569;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    td {
+      padding: 15px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    tr:hover {
+      background: #f8fafc;
+    }
+
+    .badge {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-urgente {
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+    }
+
+    .badge-normal {
+      background: #f0fdf4;
+      color: #16a34a;
+      border: 1px solid #bbf7d0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class='container'>
+    <h1>📋 Dashboard de Tareas</h1>
+    <p class='subtitle'>
+      Vista general de la memoria del sistema (3 tareas activas)
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Actividad</th>
+          <th>Categoria</th>
+          <th>Fecha Limite</th>
+          <th>Duracion</th>
+          <th>Estado IA</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td style='font-weight:600;'>Ir al futbol</td>
+          <td>
+            <span style='background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:4px; font-size:0.8rem;'>
+              DEPORTE
+            </span>
+          </td>
+          <td>2026-01-23</td>
+          <td>90 min</td>
+          <td>
+            <span class='badge badge-urgente'>⚡ URGENTE</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td style='font-weight:600;'>Estudiar para fisica</td>
+          <td>
+            <span style='background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:4px; font-size:0.8rem;'>
+              UNIVERSIDAD
+            </span>
+          </td>
+          <td>2026-01-24</td>
+          <td>120 min</td>
+          <td>
+            <span class='badge badge-urgente'>⚡ URGENTE</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td style='font-weight:600;'>Comprar comida</td>
+          <td>
+            <span style='background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:4px; font-size:0.8rem;'>
+              MANDADOS
+            </span>
+          </td>
+          <td>2026-01-28</td>
+          <td>45 min</td>
+          <td>
+            <span class='badge badge-normal'>✅ AL DIA</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
