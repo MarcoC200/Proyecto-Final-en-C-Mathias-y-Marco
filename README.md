@@ -81,16 +81,6 @@ task-planner-c/
 ├─ .gitignore  # Archivos ignorados por Git
 └─ README.md   # Este archivo
 ```
-## Ejecucion
-
-```txt
-En la terminal:
-
-gcc src/main.c src/task.c src/heuristics.c src/scheduler.c src/io.c src/utils.c -Iinclude -o planner
-
-./planner.exe
-
-```
 
 
 
